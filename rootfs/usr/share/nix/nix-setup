@@ -9,6 +9,10 @@ fi
 tar -C /var -xpf /usr/share/nix/nix.tar.xz
 rm -f /usr/share/nix/nix.tar.xz || true
 
+# Ensure that this directory exists when creating an ostree commit
+mkdir -p /var/nix/var/nix/daemon-socket/
+touch /var/nix/var/nix/daemon-socket/.keep
+
 # Set up root channels ()
 if ! test -e /root/.nix-defexpr && test -e /nix/var/nix/profiles/per-user/root/channels; then
     mkdir -p $out/root/.nix-defexpr
